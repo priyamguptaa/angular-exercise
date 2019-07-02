@@ -1,0 +1,46 @@
+<div class="container">
+  
+  <div class="row search-bar">
+    <div class="search-category text-center col-sm-9 ">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <input (input)="searchCategoryOnChange($event.target.value)" class="chk-input search-addr-input search-input" type="text"
+        placeholder="Search events" type="text" />
+    </div>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Date</th>
+        <th>Seats available</th>
+        <th>Actions</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of eventsList">
+        <td>{{event.name}}</td>
+        <td>
+          <img [src]="event.image">
+        </td>
+        <td>{{event.date_of_event}}</td>
+        <td>{{event.available_seats}}</td>
+        <td>
+          <button type="button" class="btn btn-primary" (click)="goToBookings(event)" *ngIf="event.available_seats > 0">
+            Book now
+          </button>
+          <div *ngIf="event.available_seats <= 0" class="sold-out">
+            Sold out!
+          </div>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center" *ngIf="noEvents">
+    No events found!
+  </div>
+
+
+</div>
